@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-import 'invoices_controller.dart';
 
-class InvoicesPage extends StatefulWidget {
+class InvoicesPage extends StatelessWidget {
+  const InvoicesPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
+  }
+}
+
+/* class InvoicesPage extends StatefulWidget {
   final String title;
   const InvoicesPage({Key? key, this.title = "Invoices"}) : super(key: key);
 
@@ -106,3 +112,4 @@ class _InvoicesPageState extends ModularState<InvoicesPage, InvoicesController> 
     );
   }
 }
+ */

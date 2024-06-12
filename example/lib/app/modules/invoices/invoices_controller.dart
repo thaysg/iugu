@@ -1,8 +1,3 @@
-import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-import 'package:iugu/domain/entities/invoice_model.dart';
-import 'package:iugu/iugu.dart';
 import 'package:mobx/mobx.dart';
 
 part 'invoices_controller.g.dart';
@@ -10,7 +5,7 @@ part 'invoices_controller.g.dart';
 class InvoicesController = _InvoicesControllerBase with _$InvoicesController;
 
 abstract class _InvoicesControllerBase with Store {
-  final Invoice _invoice;
+  /* final Invoice _invoice;
 
   _InvoicesControllerBase(this._invoice) {
     getInvoices();
@@ -119,5 +114,5 @@ abstract class _InvoicesControllerBase with Store {
         );
       });
     }
-  }
+  } */
 }

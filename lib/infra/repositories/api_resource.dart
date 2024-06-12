@@ -174,7 +174,7 @@ class APIResource extends IApiResources {
     try {
       var result = await _dio.post(url, data: data);
       return result.data is String ? json.decode(result.data) : result.data;
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       print(e.response);
       rethrow;
     }

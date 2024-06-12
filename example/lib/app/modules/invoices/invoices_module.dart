@@ -1,11 +1,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:iugu/iugu.dart';
 
-import 'invoices_controller.dart';
-import 'invoices_page.dart';
-
-class InvoicesModule extends ChildModule {
-  @override
+class InvoicesModule extends Module {
+  /* @override
   List<Bind> get binds => [
         Bind((i) => InvoicesController(i())),
         Bind((i) => Invoice(i())),
@@ -16,5 +12,5 @@ class InvoicesModule extends ChildModule {
         ModularRouter(Modular.initialRoute, child: (_, args) => InvoicesPage()),
       ];
 
-  static Inject get to => Inject<InvoicesModule>.of();
+  static Inject get to => Inject<InvoicesModule>.of(); */
 }

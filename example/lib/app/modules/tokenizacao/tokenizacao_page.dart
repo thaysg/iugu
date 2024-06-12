@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-import 'tokenizacao_controller.dart';
 
-class TokenizacaoPage extends StatefulWidget {
+class TokenizacaoPage extends StatelessWidget {
+  const TokenizacaoPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
+  }
+}
+
+/* class TokenizacaoPage extends StatefulWidget {
   final String title;
   const TokenizacaoPage({Key? key, this.title = "Tokenizacao"}) : super(key: key);
 
@@ -27,3 +34,4 @@ class _TokenizacaoPageState extends ModularState<TokenizacaoPage, TokenizacaoCon
     );
   }
 }
+ */

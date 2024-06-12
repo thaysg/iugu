@@ -1,11 +1,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:iugu/iugu.dart';
 
-import 'home_controller.dart';
-import 'home_page.dart';
-
-class HomeModule extends ChildModule {
-  @override
+class HomeModule extends Module {
+  /* @override
   List<Bind> get binds => [
         Bind((i) => HomeController(i())),
         Bind((i) => Customer(i())),
@@ -16,5 +12,5 @@ class HomeModule extends ChildModule {
         ModularRouter(Modular.initialRoute, child: (_, args) => HomePage()),
       ];
 
-  static Inject get to => Inject<HomeModule>.of();
+  static Inject get to => Inject<HomeModule>.of(); */
 }

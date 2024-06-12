@@ -1,4 +1,3 @@
-import 'package:test/test.dart';
 import 'package:iugu/domain/entities/data_entry/custom_variables.dart';
 import 'package:iugu/domain/entities/invoice_model.dart';
 import 'package:iugu/domain/entities/payer_model.dart';
@@ -7,6 +6,7 @@ import 'package:iugu/infra/repositories/plans.dart';
 import 'package:iugu/infra/repositories/subscription.dart';
 import 'package:iugu/iugu.dart';
 import 'package:iugu/utils/constantes.dart';
+import 'package:test/test.dart';
 import 'package:uuid/uuid.dart';
 
 import 'data_builder/data_builder.dart';
@@ -30,7 +30,10 @@ void main() {
 
       var invoiceDate = DateTime.now().add(Duration(days: 2));
 
-      var customer = CustomerRequestMessage(email: "anyemail@email.com", name: "Client Name", customVariables: customVariables);
+      var customer = CustomerRequestMessage(
+          email: "anyemail@email.com",
+          name: "Client Name",
+          customVariables: customVariables);
 
       // Act
       var apiInvoice = Invoice(IuguClientData.createClient);
@@ -40,12 +43,30 @@ void main() {
 
       var customerResponse = await apiCustomer.create(request: customer);
       var radomPlan = Uuid().v1();
-      var plan = await apiPlan.create(plan: PlanRequestMessage(name: "$radomPlan-12x", uniqueIdentifier: "$radomPlan-Plan", cycle: 1, intervalType: "months", valueInCents: 0, currencyTypeName: "BRL", paymentMethod: PaymentMethod.BANK_SLIP));
+      var plan = await apiPlan.create(
+          plan: PlanRequestMessage(
+              name: "$radomPlan-12x",
+              uniqueIdentifier: "$radomPlan-Plan",
+              cycle: 1,
+              intervalType: "months",
+              valueInCents: 0,
+              currencyTypeName: "BRL",
+              paymentMethod: PaymentMethod.BANK_SLIP));
 
       var subscriptionItems = [
-        SubscriptionSubitem(description: "Mensalidade", priceCents: 65000, quantity: 1, recurrent: true)
+        SubscriptionSubitem(
+            description: "Mensalidade",
+            priceCents: 65000,
+            quantity: 1,
+            recurrent: true)
       ];
-      var subscription = await apiSubscription.create(request: SubscriptionRequestMessage(customerId: customerResponse.id, planId: plan.identifier, isCreditBased: false, customVariables: customVariables, subitems: subscriptionItems));
+      var subscription = await apiSubscription.create(
+          request: SubscriptionRequestMessage(
+              customerId: customerResponse.id,
+              planId: plan.identifier,
+              isCreditBased: false,
+              customVariables: customVariables,
+              subitems: subscriptionItems));
 
       var invoiceItems = [
         Item(description: "Mensalidade", priceCents: 65000, quantity: 1)
@@ -80,11 +101,6 @@ void main() {
       ];
 
       var invoiceDate = DateTime.now().add(Duration(days: 2));
-
-      var customer = CustomerRequestMessage(
-        email: "anyemailSubConta@email.com",
-        name: "Client Name",
-      );
 
       // Act
       var apiInvoice = Invoice(IuguClientData.createClient);
@@ -124,7 +140,10 @@ void main() {
       var dtTemp = invoiceDate.add(Duration(days: 3));
       var newDate = '${dtTemp.year}-${dtTemp.month}-${dtTemp.day}';
 
-      var customer = CustomerRequestMessage(email: "anyemail@email.com", name: "Client Name", customVariables: customVariables);
+      var customer = CustomerRequestMessage(
+          email: "anyemail@email.com",
+          name: "Client Name",
+          customVariables: customVariables);
 
       // Act
       var apiInvoice = Invoice(IuguClientData.createClient);
@@ -136,12 +155,30 @@ void main() {
 
       var radomPlan = Uuid().v1();
 
-      var plan = await apiPlan.create(plan: PlanRequestMessage(name: "$radomPlan-12x", uniqueIdentifier: "$radomPlan-Plan", cycle: 1, intervalType: "months", valueInCents: 0, currencyTypeName: "BRL", paymentMethod: PaymentMethod.BANK_SLIP));
+      var plan = await apiPlan.create(
+          plan: PlanRequestMessage(
+              name: "$radomPlan-12x",
+              uniqueIdentifier: "$radomPlan-Plan",
+              cycle: 1,
+              intervalType: "months",
+              valueInCents: 0,
+              currencyTypeName: "BRL",
+              paymentMethod: PaymentMethod.BANK_SLIP));
 
       var subscriptionItems = [
-        SubscriptionSubitem(description: "Mensalidade", priceCents: 65000, quantity: 1, recurrent: true)
+        SubscriptionSubitem(
+            description: "Mensalidade",
+            priceCents: 65000,
+            quantity: 1,
+            recurrent: true)
       ];
-      var subscription = await apiSubscription.create(request: SubscriptionRequestMessage(customerId: customerResponse.id, planId: plan.identifier, isCreditBased: false, customVariables: customVariables, subitems: subscriptionItems));
+      var subscription = await apiSubscription.create(
+          request: SubscriptionRequestMessage(
+              customerId: customerResponse.id,
+              planId: plan.identifier,
+              isCreditBased: false,
+              customVariables: customVariables,
+              subitems: subscriptionItems));
 
       var invoiceItems = [
         Item(description: "Mensalidade", priceCents: 65000, quantity: 1)
@@ -157,7 +194,9 @@ void main() {
         earlyPaymentDiscount: false,
       );
 
-      invoice = await apiInvoice.duplicate(id: current.id, data: InvoiceDuplicateRequestMessage(newDueDate: newDate));
+      invoice = await apiInvoice.duplicate(
+          id: current.id,
+          data: InvoiceDuplicateRequestMessage(newDueDate: newDate));
 
       // Assert
       expect(invoice, isNotNull);
@@ -167,7 +206,7 @@ void main() {
       // Act
       var apiInvoice = Invoice(IuguClientData.createClient);
 
-      var radomPlan = Uuid().v1();
+      Uuid().v1();
 
       var invoice = await apiInvoice.getById(
         id: 'A78901420BE74ACDBAB185D34FD7F0EF',

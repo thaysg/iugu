@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-import 'home_controller.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
+  }
+}
+
+/* class HomePage extends StatefulWidget {
   final String title;
   const HomePage({Key? key, this.title = "Home"}) : super(key: key);
 
@@ -21,13 +28,13 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
       ),
       body: Column(
         children: <Widget>[
-          RaisedButton(
+          ElevatedButton(
             onPressed: () {
               Modular.to.pushNamed("/invoices");
             },
             child: Text("Invoices"),
           ),
-          RaisedButton(
+          ElevatedButton(
             onPressed: () {
               Modular.to.pushNamed("/tokenizacao");
             },
@@ -37,4 +44,4 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
       ),
     );
   }
-}
+} */

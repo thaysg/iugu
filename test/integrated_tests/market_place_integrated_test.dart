@@ -1,10 +1,10 @@
 import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
-import 'package:mocktail/mocktail.dart';
-import 'package:test/test.dart';
 import 'package:iugu/infra/repositories/market_place.dart';
 import 'package:iugu/iugu.dart';
+import 'package:mocktail/mocktail.dart';
+import 'package:test/test.dart';
 
 import 'data_builder/data_builder.dart';
 
@@ -20,8 +20,8 @@ void main() {
   late DioAdapterMock dioAdapterMock;
 
   setUpAll(() {
-    registerFallbackValue<RequestOptions>(RequestOptionsFake());
-    registerFallbackValue<Stream<Uint8List>>(StreamUint8ListFake());
+    /*  registerFallbackValue<RequestOptions>(RequestOptionsFake());
+    registerFallbackValue<Stream<Uint8List>>(StreamUint8ListFake()); */
   });
 
   setUp(() {
@@ -32,14 +32,18 @@ void main() {
   group("market_place_integrated_test", () {
     test('Create_a_under_acoount_with_success', () async {
       final httpResponse = ResponseBody.fromString(
-        AccountResponseMessage(accountId: '1', name: 'Vilson Dauinheimer').toJson(),
+        AccountResponseMessage(accountId: '1', name: 'Vilson Dauinheimer')
+            .toJson(),
         200,
       );
 
-      when(() => dioAdapterMock.fetch(any(), any(), any())).thenAnswer((_) async => httpResponse);
+      when(() => dioAdapterMock.fetch(any(), any(), any()))
+          .thenAnswer((_) async => httpResponse);
 
       // Arrange
-      var request = AccountRequestMessage(name: "any_market_place_under_account@gmail.com", commissionPercent: 10);
+      var request = AccountRequestMessage(
+          name: "any_market_place_under_account@gmail.com",
+          commissionPercent: 10);
 
       AccountResponseMessage response;
       // Act
@@ -65,7 +69,8 @@ void main() {
       );
 
       // when(() => dioAdapterMock.fetch(any(), any(), any())).thenAnswer((_) async => httpResponse);
-      when(() => dioAdapterMock.fetch(any(), any(), any())).thenAnswer((_) async => httpResponse);
+      when(() => dioAdapterMock.fetch(any(), any(), any()))
+          .thenAnswer((_) async => httpResponse);
       MarketplaceAccountsResponse response;
 
       // Act
@@ -87,7 +92,8 @@ void main() {
         200,
       );
 
-      when(() => dioAdapterMock.fetch(any(), any(), any())).thenAnswer((_) async => httpResponse);
+      when(() => dioAdapterMock.fetch(any(), any(), any()))
+          .thenAnswer((_) async => httpResponse);
 
       PaggedResponseMessage<MarketPlaceAccountItem> response;
 

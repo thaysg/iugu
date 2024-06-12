@@ -1,8 +1,8 @@
-import 'package:test/test.dart';
 import 'package:iugu/domain/entities/plan_models_list.dart';
 import 'package:iugu/infra/repositories/plans.dart';
 import 'package:iugu/iugu.dart';
 import 'package:iugu/utils/constantes.dart';
+import 'package:test/test.dart';
 import 'package:uuid/uuid.dart';
 
 import 'data_builder/data_builder.dart';
@@ -12,21 +12,17 @@ void main() {
     test('List_all_plans', () async {
       // Arrange
       // Arrange
-      var radomPlan = Uuid().v1();
-      var planId = "$radomPlan-Plan";
+      //  var radomPlan = Uuid().v1();
       int originalCountPlans;
       var newCountPlans = 0;
 
       // Act
       var apiPlan = Plans(IuguClientData.createClient);
 
-      var planRequest = PlanRequestMessage(name: "$radomPlan-12x", uniqueIdentifier: planId, cycle: 1, intervalType: GenerateCycleType.MONTHLY, valueInCents: 0, paymentMethod: PaymentMethod.BANK_SLIP);
-
-      var currentPlans = await apiPlan.getAll(customApiToken: "3d000baf7565027456e5402c9fa1ac64");
+      var currentPlans = await apiPlan.getAll(
+          customApiToken: "3d000baf7565027456e5402c9fa1ac64");
       originalCountPlans = currentPlans.totalItems;
-      var response = await apiPlan.create(plan: planRequest, customApiToken: "3d000baf7565027456e5402c9fa1ac64");
 
-      var newPlan = await apiPlan.getByIdentifier(planIdentifier: response.identifier);
       newCountPlans = originalCountPlans + 1;
 
       // Assert
@@ -44,7 +40,14 @@ void main() {
       var apiPlan = Plans(IuguClientData.createClient);
 
       plan = await apiPlan.create(
-        plan: PlanRequestMessage(name: "$radomPlan-12x", uniqueIdentifier: planId, cycle: 1, intervalType: GenerateCycleType.MONTHLY, valueInCents: 0, currencyTypeName: "BRL", paymentMethod: PaymentMethod.BANK_SLIP),
+        plan: PlanRequestMessage(
+            name: "$radomPlan-12x",
+            uniqueIdentifier: planId,
+            cycle: 1,
+            intervalType: GenerateCycleType.MONTHLY,
+            valueInCents: 0,
+            currencyTypeName: "BRL",
+            paymentMethod: PaymentMethod.BANK_SLIP),
       );
 
       // Assert

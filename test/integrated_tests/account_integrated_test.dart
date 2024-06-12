@@ -1,13 +1,13 @@
 import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
-import 'package:mocktail/mocktail.dart';
-import 'package:test/test.dart';
 import 'package:iugu/domain/entities/account_model.dart';
 import 'package:iugu/infra/models/response/verify_account_response_message.dart';
 import 'package:iugu/infra/repositories/market_place.dart';
 import 'package:iugu/iugu.dart';
 import 'package:iugu/utils/constantes.dart';
+import 'package:mocktail/mocktail.dart';
+import 'package:test/test.dart';
 
 import 'data_builder/data_builder.dart';
 
@@ -20,8 +20,8 @@ class StreamUint8ListFake extends Fake implements Stream<Uint8List> {}
 
 void main() {
   setUpAll(() {
-    registerFallbackValue<RequestOptions>(RequestOptionsFake());
-    registerFallbackValue<Stream<Uint8List>>(StreamUint8ListFake());
+    /* registerFallbackValue<RequestOptions>(RequestOptionsFake());
+    registerFallbackValue<Stream<Uint8List>>(StreamUint8ListFake()); */
   });
 
   group("account_integrated_test", () {
@@ -43,9 +43,11 @@ void main() {
         200,
       );
 
-      when(() => dioAdapterMock.fetch(any(), any(), any())).thenAnswer((_) async => httpResponse);
+      when(() => dioAdapterMock.fetch(any(), any(), any()))
+          .thenAnswer((_) async => httpResponse);
 
-      var request = AccountRequestMessage(name: "test_account@gmail.com", commissionPercent: 10);
+      var request = AccountRequestMessage(
+          name: "test_account@gmail.com", commissionPercent: 10);
 
       var client = MarketPlace(IuguClientData.createClient, dio);
 
@@ -74,24 +76,31 @@ void main() {
 
     test('Verify_if_account_is_valid', () async {
       // Arrange
-      var requestAccountVerify = new VerifyAccountRequestMessage(data: _expectedResponse.data, automaticValidation: true);
+      var requestAccountVerify = new VerifyAccountRequestMessage(
+          data: _expectedResponse.data, automaticValidation: true);
 
       final httpResponse = ResponseBody.fromString(
         _expectedResponse.toJson(),
         200,
       );
 
-      when(() => dioAdapterMock.fetch(any(), any(), any())).thenAnswer((_) async => httpResponse);
+      when(() => dioAdapterMock.fetch(any(), any(), any()))
+          .thenAnswer((_) async => httpResponse);
 
       // Act
       var client = Account(dio);
 
-      VerifyAccountResponseMessage verifyAccountResponse = await client.verifyUnderAccount(requestAccountVerify, _response.accountId, _response.userToken);
+      VerifyAccountResponseMessage verifyAccountResponse =
+          await client.verifyUnderAccount(
+              requestAccountVerify, _response.accountId, _response.userToken);
 
       // Assert
-      expect(_expectedResponse.data.name, equals(verifyAccountResponse.data.name));
-      expect(_expectedResponse.data.address, equals(verifyAccountResponse.data.address));
-      expect(_expectedResponse.accountId, equals(verifyAccountResponse.accountId));
+      expect(
+          _expectedResponse.data.name, equals(verifyAccountResponse.data.name));
+      expect(_expectedResponse.data.address,
+          equals(verifyAccountResponse.data.address));
+      expect(
+          _expectedResponse.accountId, equals(verifyAccountResponse.accountId));
     });
 
     test('Get_a_created_account', () async {
@@ -106,7 +115,8 @@ void main() {
         200,
       );
 
-      when(() => dioAdapterMock.fetch(any(), any(), any())).thenAnswer((_) async => httpResponse);
+      when(() => dioAdapterMock.fetch(any(), any(), any()))
+          .thenAnswer((_) async => httpResponse);
 
       var client = Account(dio);
 

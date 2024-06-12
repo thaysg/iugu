@@ -1,6 +1,5 @@
 import 'package:iugu/domain/entities/customer_model.dart';
 import 'package:iugu/domain/interfaces/diposable_interface.dart';
-import 'package:iugu/infra/models/request/customer_request_message.dart';
 
 import '../../iugu.dart';
 import 'api_resource.dart';
@@ -101,7 +100,8 @@ class Customer extends IDisposable {
     required CustomerRequestMessage request,
     String customApiToken = '',
   }) async {
-    var result = await apiResource.post(data: request.toMap(), apiUserToken: customApiToken);
+    var result = await apiResource.post(
+        data: request.toMap(), apiUserToken: customApiToken);
     return CustomerModel.fromMap(result);
   }
 
@@ -112,7 +112,8 @@ class Customer extends IDisposable {
   //     return result;
   // }
 
-  Future<CustomerModel> delete({required String id, required String customApiToken}) async {
+  Future<CustomerModel> delete(
+      {required String id, required String customApiToken}) async {
     var result = await apiResource.delete(id: id, apiUserToken: customApiToken);
     return CustomerModel.fromMap(result);
   }
@@ -124,7 +125,8 @@ class Customer extends IDisposable {
   //     return result;
   // }
 
-  Future<CustomerModel> put({required String id, required CustomerModel model}) async {
+  Future<CustomerModel> put(
+      {required String id, required CustomerModel model}) async {
     var result = await apiResource.put(id: id, data: model.toMap());
     return CustomerModel.fromMap(result);
   }
